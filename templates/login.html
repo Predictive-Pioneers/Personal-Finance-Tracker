@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login - Finance Tracker</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        .brand-panel {
+            flex: 1;
+            background: linear-gradient(135deg, #7b61ff 0%, #5a4fff 50%, #3d2fff 100%);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .brand-panel::before {
+            content: "";
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 50%;
+            top: -100px;
+            right: -100px;
+        }
+
+        .brand-panel::after {
+            content: "";
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            background: rgba(255,255,255,0.06);
+            border-radius: 50%;
+            bottom: -60px;
+            left: -60px;
+        }
+
+        .brand-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .brand-panel h1 {
+            font-weight: 700;
+            font-size: 2.2rem;
+        }
+
+        .brand-panel p {
+            opacity: 0.85;
+            font-size: 1.05rem;
+            max-width: 380px;
+        }
+
+        .form-panel {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f8f9fc;
+        }
+
+        .form-box {
+            width: 100%;
+            max-width: 380px;
+            padding: 2rem;
+        }
+
+        .form-box h3 {
+            font-weight: 700;
+        }
+
+        .form-control {
+            padding: 0.7rem 1rem;
+            border-radius: 10px;
+        }
+
+        .btn-gradient {
+            background: linear-gradient(135deg, #7b61ff, #5a4fff);
+            color: white;
+            border: none;
+            padding: 0.7rem;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        .btn-gradient:hover {
+            opacity: 0.9;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .brand-panel { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="brand-panel">
+    <div class="brand-icon"><i class="bi bi-piggy-bank-fill"></i></div>
+    <h1>Finance Tracker</h1>
+    <p>Track your income, control your expenses, and stay on top of your budget — all in one place.</p>
+</div>
+
+<div class="form-panel">
+    <div class="form-box">
+        <h3 class="mb-1">Welcome back 👋</h3>
+        <p class="text-secondary mb-4">Login to continue to your dashboard</p>
+
+        {% if error %}
+        <div class="alert alert-danger py-2">{{ error }}</div>
+        {% endif %}
+
+        <form method="POST">
+            <div class="mb-3">
+                <label class="form-label">Username</label>
+                <input type="text" name="username" class="form-control" required autofocus>
+            </div>
+            <div class="mb-4">
+                <label class="form-label">Password</label>
+                <input type="password" name="password" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-gradient w-100">Login</button>
+        </form>
+
+        <p class="text-center mt-4 mb-0 text-secondary">
+            New here? <a href="{{ url_for('signup') }}" class="text-decoration-none fw-semibold">Create an account</a>
+        </p>
+    </div>
+</div>
+
+</body>
+</html>

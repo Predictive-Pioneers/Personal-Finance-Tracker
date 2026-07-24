@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Budget{% endblock %}
+{% block content %}
+
+<h1 class="mb-4">🎯 Budget Status</h1>
+
+{% if alerts %}
+<div class="alert alert-danger">
+    <strong>⚠ Budget Exceeded in these categories:</strong>
+    <ul class="mb-0">
+        {% for a in alerts %}
+        <li>{{ a.category }}: spent ₹{{ a.spent }} (limit: ₹{{ a.limit }})</li>
+        {% endfor %}
+    </ul>
+</div>
+{% else %}
+<div class="alert alert-success">
+    ✅ You're within budget in all categories this month!
+</div>
+{% endif %}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Category</th>
+            <th>Spent</th>
+            <th>Limit</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in budget_status %}
+        <tr>
+            <td>{{ row.category }}</td>
+            <td>₹{{ row.spent }}</td>
+            <td>₹{{ row.limit }}</td>
+            <td>
+                {% if row.spent > row.limit %}
+                <span class="badge bg-danger">Over Budget</span>
+                {% else %}
+                <span class="badge bg-success">Within Budget</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
