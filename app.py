@@ -141,7 +141,10 @@ def get_available_months(df):
 
 
 app = Flask(__name__)
-app.secret_key = "change-this-to-something-random-and-secret"
+app.secret_key = os.environ.get(
+    "SECRET_KEY",
+    "change-this-to-something-random-and-secret"
+)
 
 
 @app.route("/signup", methods=["GET", "POST"])
